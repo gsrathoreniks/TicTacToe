@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Main2Activity extends AppCompatActivity {
     TextView txt1;
@@ -20,6 +21,7 @@ public class Main2Activity extends AppCompatActivity {
     TextView txt7;
     TextView txt8;
     TextView txt9;
+    Integer clicks=0;
 
     TextView turn;
     String cs="X";
@@ -203,6 +205,7 @@ public class Main2Activity extends AppCompatActivity {
         whoWon();
     }}
     public void whoWon(){
+        clicks=clicks+1;
         if(!txt1.getText().toString().isEmpty()&&!txt2.getText().toString().isEmpty()&&!txt3.getText().toString().isEmpty()&&txt1.getText().toString()==txt2.getText().toString()&&txt2.getText().toString()==txt3.getText().toString())
             win1(txt1.getText().toString());
         if(!txt4.getText().toString().isEmpty()&&!txt5.getText().toString().isEmpty()&&!txt6.getText().toString().isEmpty()&&txt4.getText().toString()==txt5.getText().toString()&&txt5.getText().toString()==txt6.getText().toString())
@@ -219,7 +222,29 @@ public class Main2Activity extends AppCompatActivity {
             win1(txt2.getText().toString());
         if(!txt9.getText().toString().isEmpty()&&!txt6.getText().toString().isEmpty()&&!txt3.getText().toString().isEmpty()&&txt9.getText().toString()==txt6.getText().toString()&&txt6.getText().toString()==txt3.getText().toString())
             win1(txt3.getText().toString());
+        else {
+            if (clicks==9||clicks>=9) {
+                Toast.makeText(this, "MATCH DRAW", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("MATCH DRAW");
+                builder.setPositiveButton("Play Again ?", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
+                    }
+
+                });
+                builder.setNegativeButton("No ! ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        noClicked();
+                    }
+
+                });
+                builder.show();
+            }
+
+        }
     }
 
     private void win1(String winner) {
